@@ -1,0 +1,12 @@
+Package: DailyMLB
+Title: Provides Tools For Daily Fantasy Baseball
+Version: 1.8.2.000
+Authors@R: person("Benjamin", "Clarke", email = "benjaminryanclarke@icloud.com", role = c("aut", "cre"))
+Description: Provides tools(functions) to assist in daily fantasy analysis
+    focusing primarily on Draftkings MLB.
+Depends:
+    R (>= 3.3.1)
+License: What license is it under?
+Encoding: UTF-8
+LazyData: true
+RoxygenNote: 5.0.1
