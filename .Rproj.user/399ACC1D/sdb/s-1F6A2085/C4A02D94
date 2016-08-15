@@ -1,0 +1,21 @@
+{
+    "collab_server" : "",
+    "contents" : "#' Retreive the batter comparison table from Swish Analytics\n#'\n#' Runs as an interactive function asking for a Date and returns the Swish table as a data frame.\n#'\n#' @return swish data frame\n#' @export\n#'\n#' @examples swishHitters()\nswishHitters <- function(){\n  gDate <- readline(\"Enter the date as YYYY-MM-DD:\")\n  remDr <- remoteDriver(browserName = \"phantomjs\")\n  remDr$open()\n  remDr$navigate(url = paste0(\"https://swishanalytics.com/optimus/mlb/batter-comparison?date=\",gDate))\n  elem <- remDr$findElement(using = \"id\", value = \"stat-table-top\")\n  elemtxt <- elem$getElementAttribute(\"outerHTML\")[[1]]\n  elemxml <- htmlTreeParse(elemtxt, useInternalNodes = T)\n  swish <- readHTMLTable(elemxml)\n  swish.df <- data.frame(swish)\n  swishFixedNames <- (swish.df \n  %>% separate(stat.table.top.Player,into=c(\"player_Name\",\"getRidOF\"),sep=\"\\\\(\",remove = TRUE) \n  %>% select(-getRidOF))\n  return(swishFixedNames)\n  }\n",
+    "created" : 1470694038107.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "3617514452",
+    "id" : "C4A02D94",
+    "lastKnownWriteTime" : 1470645112,
+    "last_content_update" : 1470645112,
+    "path" : "~/Documents/DailyMLB/R/getSwishHitters.R",
+    "project_path" : "R/getSwishHitters.R",
+    "properties" : {
+        "source_window_id" : ""
+    },
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "r_source"
+}
