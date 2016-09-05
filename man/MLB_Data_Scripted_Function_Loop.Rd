@@ -5,7 +5,7 @@
 \title{Full running MLB tool on a loop}
 \usage{
 MLB_Data_Scripted_Function_Loop(Ddate = paste0("6_", i, "_2016"),
-  modelDateFlabs = "6_12_2016", idFlabs = "301", gDateSwisher = "06",
+  modelDateFlabs = "06", idFlabs = "301", gDateSwisher = "2016",
   urlDateCashLine = "jun")
 }
 \arguments{
