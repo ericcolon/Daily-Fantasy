@@ -5,7 +5,7 @@
 #' @return VIFS Linear models
 #' @export
 #'
-#' @examples
+#' @examples ...
 vifStepLinearModelNFL <- function(lmodel = lm1){
 all_vifs <- car::vif(lm1)
 print(all_vifs)

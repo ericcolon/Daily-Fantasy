@@ -5,7 +5,7 @@
 #' @return LM for NFL 
 #' @export
 #'
-#' @examples
+#' @examples ...
 linearModelNFLSetup <- function(NFLModel = DST2015SeasonAllBinded){
 NFLModel.cor <- cor(NFLModel[,sapply(NFLModel,is.numeric)])
 NFLModel.cor <- na.zero(NFLModel.cor)
