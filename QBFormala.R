@@ -1,0 +1,42 @@
+AllQB <- foreach(i=1:17) %do% getNflLabModel("2015",i,PositionID = "QB")
+readQB <- foreach(i=1:17) %do% readNFLCSVs("2015",i,PositionID = "QB")
+AllQB16<- foreach(i=1) %do% getNflLabModel("2016",i,mod = "Tournament",PositionID = "QB")
+readQB16 <- foreach(i=1) %do% readNFLCSVs("2016",i,mod = "Tournament",PositionID = "QB")
+QB <- bind_rows(readQB16,readQB)
+week <- 1  
+QBModel <- getNflLabModel("2016",week,PositionID = "QB")
+QBModel <- na.zero(readNFLCSVs("2016",week,PositionID = "QB"))
+                   QBnums <- na.zero(QB[,sapply(QB,is.numeric)])
+                   QBnums <- QBnums %>% select(-X,-Properties.ActualPoints)
+                   yQB <- QBnums$ActualPoints
+                   xQB <- QBnums %>% select(-ActualPoints)
+                                                      
+QBFormula <- yQB ~ Score + FantasyResultId + Salary + Properties.AvgPts + 
+  Properties.Ceiling + Properties.ProjPlusMinus + Properties.Site_Salary + 
+  Properties.OppPlusMinus + Properties.OffensiveSnapsPlayed + 
+  Properties.Pts + Properties.OppPts + Properties.Spread + 
+  Properties.Total + Properties.InterceptionPct + Properties.PassingSuccessfulPct + 
+  Properties.RushingSuccessfulAllowedPct + Properties.SackPct + 
+  Properties.TakeawayPct + Properties.YardsPerPassingAttempt + 
+  Properties.ReceivingTouchdownsMarketShare + Properties.ReceivingYardsMarketShare + 
+  Properties.PassingCompletions + Properties.PassingCompletionPercentage + 
+  Properties.AdjYPA + Properties.PassingLong + Properties.PassSackPct + 
+  Properties.RushingAttempts + Properties.RushingLong + Properties.RushYards + 
+  Properties.RushingYardsPerAttempt + Properties.RushingSuccessfulPct + 
+  Properties.ReceivingYards + Properties.ReceivingLong + Properties.ReceivingTouchdowns + 
+  Properties.ReceivingYardsPerTarget + Properties.RushingTouchdownsRedZonePct + 
+  Properties.ReceivingTouchdownsRedZonePct + Properties.RedZoneSnaps10 + 
+  Properties.RedZoneTouchdownPct + 
+  Properties.OppPlusMinusPct + 
+  Properties.ProjPlaysPct + Properties.MktShrPct + Properties.ProjPct + 
+  Properties.PtPerDPct + Properties.FloorPct + Properties.Vegas + 
+  Properties.Salary_Movement + Properties.Upside + Properties.Pro_Pct + 
+  Properties.RushingFantasyPct  + 
+  Properties.EventTeamId
+QBFit <- lm(yQB~.,data = xQB)
+summary(QBFit)
+addToPred <- min(QBFit$residuals)
+QBP <- predict(QBFit,QBModel)
+QBP <- QBP-addToPred
+QBFile <- cbind(QBModel$Properties.Player_Name,QBP)
+write.csv(QBFile, file = paste0("QBP",week,".csv"))

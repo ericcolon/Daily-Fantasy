@@ -4,10 +4,10 @@
 \alias{vifStepLinearModelNFL}
 \title{NFL VIF fitting}
 \usage{
-vifStepLinearModelNFL(lmodel = lm1)
+vifStepLinearModelNFL(QBFit, yQB, xQB)
 }
 \arguments{
-\item{lmodel}{}
+\item{QBFit}{}
 }
 \value{
 VIFS Linear models

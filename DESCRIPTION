@@ -1,11 +1,36 @@
 Package: DFSTools
 Title: Provides Tools For Daily Fantasy Sports
-Version: 2.1.0
+Version: 2.1.2
 Authors@R: person("Benjamin", "Clarke", email = "benjaminryanclarke@icloud.com", role = c("aut", "cre"))
 Description: Provides tools(functions) to assist in daily fantasy analysis
     focusing primarily on Draftkings contests and data
 Depends:
     R (>= 3.3.1)
+Imports: 
+    car,
+    codetools,
+    corrplot,
+    curl,
+    devtools,
+    FactoMineR,
+    foreach,
+    htmltools,
+    httr,
+    jsonlite,
+    lubridate,
+    lazyeval,
+    leaps,
+    dplyr,
+    RCurl,
+    rio,
+    xml2,
+    RSelenium,
+    rvest,
+    stats4,
+    stringr,
+    tidyjson,
+    tidyr,
+    XML
 License: What license is it under?
 Encoding: UTF-8
 LazyData: true
