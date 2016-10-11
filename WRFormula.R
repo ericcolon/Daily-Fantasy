@@ -1,9 +1,10 @@
+j <- 2
 AllWR <- foreach(i=1:17) %do% getNflLabModel("2015",i,mod = "Tournament",PositionID = "WR")
 readWR <- foreach(i=1:17) %do% readNFLCSVs("2015",i,mod = "Tournament",PositionID = "WR")
-AllWR16<- foreach(i=1) %do% getNflLabModel("2016",i,mod = "Tournament",PositionID = "WR")
-readWR16 <- foreach(i=1) %do% readNFLCSVs("2016",i,mod = "Tournament",PositionID = "WR")
-WR <- bind_rows(readWR16,readWR)
-week <- 1
+AllWR16<- foreach(i=1:j) %do% getNflLabModel("2016",i,mod = "Tournament",PositionID = "WR")
+readWR16 <- foreach(i=1:j) %do% readNFLCSVs("2016",i,mod = "Tournament",PositionID = "WR")
+WR <- bind_rows(readWR16)#,readWR)
+#week <- 1
 WRModel <- getNflLabModel("2016",week,PositionID = "WR")
 WRModel <- na.zero(readNFLCSVs("2016",week,PositionID = "WR"))
 WRnums <- na.zero(WR[,sapply(WR,is.numeric)])
@@ -19,4 +20,4 @@ WRP <- predict(WRFit,WRModel)
 WRP <- WRP-addToPred
 WRFile <- cbind(WRModel$Properties.Player_Name,WRP)
 write.csv(WRFile, file = paste0("WRP",week,".csv"))
-
+WRFile

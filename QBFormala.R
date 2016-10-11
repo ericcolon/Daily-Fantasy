@@ -1,11 +1,14 @@
+j <- 3#last completed week on the season
 AllQB <- foreach(i=1:17) %do% getNflLabModel("2015",i,PositionID = "QB")
 readQB <- foreach(i=1:17) %do% readNFLCSVs("2015",i,PositionID = "QB")
-AllQB16<- foreach(i=1) %do% getNflLabModel("2016",i,mod = "Tournament",PositionID = "QB")
-readQB16 <- foreach(i=1) %do% readNFLCSVs("2016",i,mod = "Tournament",PositionID = "QB")
-QB <- bind_rows(readQB16,readQB)
-week <- 1  
+AllQB16<- foreach(i=1:j) %do% getNflLabModel("2016",i,mod = "Tournament",PositionID = "QB")
+readQB16 <- foreach(i=1:j) %do% readNFLCSVs("2016",i,mod = "Tournament",PositionID = "QB")
+QB <- bind_rows(readQB16)#,readQB)
+# QB <- QB %>% select(-Properties.MyTrends.custom)
+week <- 4  #Week to project
 QBModel <- getNflLabModel("2016",week,PositionID = "QB")
 QBModel <- na.zero(readNFLCSVs("2016",week,PositionID = "QB"))
+
                    QBnums <- na.zero(QB[,sapply(QB,is.numeric)])
                    QBnums <- QBnums %>% select(-X,-Properties.ActualPoints)
                    yQB <- QBnums$ActualPoints
@@ -40,3 +43,4 @@ QBP <- predict(QBFit,QBModel)
 QBP <- QBP-addToPred
 QBFile <- cbind(QBModel$Properties.Player_Name,QBP)
 write.csv(QBFile, file = paste0("QBP",week,".csv"))
+QBFile

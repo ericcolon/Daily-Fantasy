@@ -1,13 +1,13 @@
 Package: DFSTools
 Title: Provides Tools For Daily Fantasy Sports
-Version: 2.1.2
+Version: 2.1.5
 Authors@R: person("Benjamin", "Clarke", email = "benjaminryanclarke@icloud.com", role = c("aut", "cre"))
 Description: Provides tools(functions) to assist in daily fantasy analysis
     focusing primarily on Draftkings contests and data
 Depends:
-    R (>= 3.3.1)
-Imports: 
+    R (>= 3.3.1),
     car,
+    caret,
     codetools,
     corrplot,
     curl,
