@@ -15,9 +15,11 @@ xTE <- TEnums %>% select(-ActualPoints)
 
 TEFit <- lm(yTE~.,data = xTE)
 summary(TEFit)
-addToPred <- min(TEFit$residuals)
+TEFit <- step(TEFit)
+summary(TEFit)
+#addToPred <- min(TEFit$residuals)
 TEP <- predict(TEFit,TEModel)
-TEP <- TEP-addToPred
+#TEP <- TEP-addToPred
 TEFile <- cbind(TEModel$Properties.Player_Name,TEP)
 write.csv(TEFile, file = paste0("TEP",week,".csv"))
 TEFile

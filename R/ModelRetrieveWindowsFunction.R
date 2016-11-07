@@ -13,7 +13,7 @@
 windowsNFLModel <- function(userName = "Benjaminryanshopping@icloud.com",passWord = "W3ytjk589682",modelYear = "2016",modelWeek = 1,modelPosition = "QB"){
 pJS <- phantom()
 week2016 <- as.POSIXct("2016-09-07 23:12:13", tz = "Etc/GMT+8")
-allWeeks2016 <- week2016 + weeks(0:17)
+allWeeks2016 <- week2016 + weeks(0:45)
 dates2016 <- format(allWeeks2016, format="%m_%d_%Y")
 week2015 <- as.POSIXct("2015-09-09 23:12:13", tz = "Etc/GMT+8")
 allWeeks2015 <- week2015 + weeks(0:17)

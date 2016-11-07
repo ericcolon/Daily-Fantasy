@@ -16,9 +16,11 @@ xRB <- RBnums %>% select(-ActualPoints)
 
 RBFit <- lm(yRB~.,data = xRB)
 summary(RBFit)
-addToPred <- min(RBFit$residuals)
+RBFit <- step(RBFit)
+summary(RBFit)
+#addToPred <- min(RBFit$residuals)
 RBP <- predict(RBFit,RBModel)
-RBP <- RBP-addToPred
+#RBP <- RBP-addToPred
 RBFile <- cbind(RBModel$Properties.Player_Name,RBP)
 write.csv(RBFile, file = paste0("RBP",week,".csv"))
 RBFile

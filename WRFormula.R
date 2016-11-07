@@ -15,9 +15,11 @@ xWR <- WRnums %>% select(-ActualPoints)
 
 WRFit <- lm(yWR~.,data = xWR)
 summary(WRFit)
-addToPred <- min(WRFit$residuals)
+WRFit <- step(WRFit)
+summary(WRFit)
+#addToPred <- min(WRFit$residuals)
 WRP <- predict(WRFit,WRModel)
-WRP <- WRP-addToPred
+#WRP <- WRP-addToPred
 WRFile <- cbind(WRModel$Properties.Player_Name,WRP)
 write.csv(WRFile, file = paste0("WRP",week,".csv"))
 WRFile

@@ -17,9 +17,11 @@ xDST <- DSTnums %>% select(-ActualPoints)
 
 DSTFit <- lm(yDST~.,data = xDST)
 summary(DSTFit)
-addToPred <- min(DSTFit$residuals)
+DSTFit <- step(DSTFit)
+summary(DSTFit)
+#addToPred <- min(DSTFit$residuals)
 DSTP <- predict(DSTFit,DSTModel)
-DSTP <- DSTP-addToPred
+#DSTP <- DSTP-addToPred
 DSTFile <- data.frame(cbind(DSTModel$Properties.Player_Name,DSTP))
 DSTFile <- DSTFile %>% dplyr::arrange(V1) 
 V1 <- c("Arizona Defense","Atlanta Defense","Baltimore Defense","Buffalo Defense","Carolina Defense","Chicago Defense","Cincinnati Defense","Cleveland Defense","Dallas Defense","Denver Defense","Detroit Defense","Green Bay Defense","Houston Defense","Jacksonville Defense","Kansas City Defense","Indianapolis Defense","LA Rams Defense","Miami Defense","Minnesota Defense","New England Defense","New Orleans Defense","NY Giants Defense","NY Jets Defense","Oakland Defense","Philadelphia Defense","Pittsburgh Defense","San Diego Defense","San Francisco Defense","Seatle Defense","Tampa Bay Defense","Tennessee Defense","Washington Defense") 
